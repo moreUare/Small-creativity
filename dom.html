@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>dom操作</title>
+	<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.js"></script>
+	<style>
+		.container{
+			width: 315px;
+			height: 400px;
+			margin:0 auto;
+			background-color: #CCFFFF;
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: flex-start;
+			align-content: flex-start;
+		}
+		.itemfigure{
+			width: 33%;
+		}
+	</style>
+	<script>
+		const baseUrl = 'http://apiv3.ccbba.cn/api/h5share/';
+		let url = baseUrl + 155;
+		$.get(url,function(response){
+			// let picArr = response.resource.pictures;
+			let picArr = [...response.resource.pictures, ...response.resource.pictures]
+			if(Array.isArray(picArr)){
+				picArr.forEach(function(item,index){
+					let imgsrc = $('<img class = "itemfigure">').attr('src',item);
+					// $('img').attr('scr',item);
+					$('.container').append(imgsrc)
+					
+				})
+			
+			}
+		})
+
+	</script>
+</head>
+
+<body>
+	<div class="container">
+		
+	</div>
+</body>
+</html>

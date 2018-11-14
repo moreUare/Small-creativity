@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta content="还是存在问题，这次使用了offset函数；之前做的时候是改变div的offsetLeft和offsetTop的属性值，没有问题">
+	<title>drag</title>
+	<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.js"></script>
+	<style>
+	.block{
+		width: 100px;
+		height: 38px;
+		text-align: center;
+		line-height: 38px;
+		border-radius: 6%;
+		display: inline-block;
+	}
+	.Primary{
+		background-color: #337AB7;
+	}
+	.Success{
+		background-color: #5CB85C;
+	}
+	.Danger{
+		background-color: #D9534F;
+	}
+	.Warning{
+		background-color: #F0AD4E;
+	}
+</style>		
+</head>
+<body>
+	<div class="block Primary" draggable="true">initially</div>
+
+	<div class="block Success" draggable="true">what's more</div>
+
+	<div class="block Danger" draggable="true">finally</div>
+
+	<script>
+		$(".Primary").on('dragstart',(eventI)=>{
+			distanceX = eventI.offsetX;
+			distanceY = eventI.offsetY;
+			console.log($(".Primary"))
+		}).on('drag',(eventN)=>{
+			$('.Primary').offset(function(n,o){
+				let newPos = new Object();
+				newPos.left = eventN.clientX - distanceX;
+				newPos.top = eventN.clientY -distanceY;
+				return newPos;
+			})
+		}).on('dragend',(eventG)=>{
+			$('.Primary').offset(function(n,o){
+				let newPos = new Object();
+				newPos.left = eventG.clientX - distanceX; 
+				newPos.top = eventG.clientY -distanceY;
+				return newPos;
+			})
+		})
+
+		$(".Success").on('dragstart',(eventI)=>{
+			console.log(eventI)
+			distanceX = eventI.offsetX;
+			distanceY = eventI.offsetY;
+			console.log(distanceX+":"+distanceY);
+		}).on('drag',(eventN)=>{
+			$(".Success").offset(function(n,o){
+				let newPos = new Object();
+				newPos.left = eventN.clientX - distanceX - 105;
+				newPos.top = eventN.clientY - distanceY;
+				return newPos;
+			})
+		}).on('dragend',(eventG)=>{
+			$(".Success").offset(function(n,o){
+				let newPos = new Object();
+				newPos.left = eventG.clientX - distanceX - 105;
+				newPos.top = eventG.clientY -distanceY;
+				return newPos;
+			})
+		})
+		$(".Danger").on('dragstart',(eventI)=>{
+			distanceX = eventI.offsetX;
+			distanceY = eventI.offsetY;
+		}).on('drag',(eventN)=>{
+			$(".Danger").offset(function(n,o){
+				let newPos = new Object();
+				newPos.left = eventN.clientX - distanceX - 210;
+				newPos.top = eventN.clientY -distanceY;
+				return newPos;
+			})
+		}).on('dragend',(eventG)=>{
+			$(".Danger").offset(function(n,o){
+				let newPos = new Object();
+				newPos.left = eventG.clientX - distanceX - 210;
+				newPos.top = eventG.clientY -distanceY;
+				return newPos;
+			})
+		})
+
+
+		// $(".Success")
+		// $(".Danger")
+	</script>
+</body>
+</html>
